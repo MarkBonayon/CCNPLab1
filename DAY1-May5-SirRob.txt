@@ -621,7 +621,7 @@ conf t
     id mac 08c5.e1db.adb5
     number 1 dn 1
     dtmf-relay sip-notify
-    username admin password pass
+    username 2199 password 2199
     codec g711ulaw
 !
   voice register pool 2
