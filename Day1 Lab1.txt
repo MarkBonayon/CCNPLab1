@@ -1,0 +1,94 @@
+https://github.com/rivancorp/ccna2
+https://github.com/rivancorp/pythonautomations
+208.8.8.129
+
+Etherchannel @D1 and @D2
+conf t 
+int range eth1/2,e1/3
+switchport trunk encap dot1q
+switchport mode trunk
+switchport trunk allowed vlan 1-99
+channel-group 30 mode active
+channel-protocol lacp
+end
+
+
+Etherchannel @D1 and @A1
+conf t 
+int range eth0/1,e0/2
+switchport trunk encap dot1q
+switchport mode trunk
+switchport trunk allowed vlan 1-99
+channel-group 10 mode active
+channel-protocol lacp
+end
+
+for D1
+Etherchannel @D1 and @A2
+conf t 
+int range eth0/0,e0/3
+switchport trunk encap dot1q
+switchport mode trunk
+switchport trunk allowed vlan 1-99
+channel-group 20 mode active
+channel-protocol lacp
+end
+
+for A2
+conf t 
+int range eth0/1,e0/2
+switchport trunk encap dot1q
+switchport mode trunk
+switchport trunk allowed vlan 1-99
+channel-group 20 mode active
+channel-protocol lacp
+end
+
+
+conf t
+ip domain-name ccnp.com
+crypto key generate rsa modulus 2048 label ccnp exportable
+ip ssh rsa keypair-name ccnp
+ip ssh version 2
+
+line vty 0 14
+transport input all
+login local
+exec-timeout 0 0 
+username admin privilege 15 secret pass
+end
+
+to get key
+crypto key export rsa ccnp pem terminal 3des C1sc0123
+
+
+-----BEGIN RSA PRIVATE KEY-----
+Proc-Type: 4,ENCRYPTED
+DEK-Info: DES-EDE3-CBC,8EBC25DF414256E6
+
+JDfu3fU9t/G9GAD3saSh+Aa1xQ6MagalstmdTyI3F4MziLxdA+gXtSLFoQaLOMcP
+yEUyV1N7PA5RImuy2m8Dg0mA/rV0e5cLLIHbAZl7kPI7/GZR2JgE0pn8TS/nmEtl
+PEMjxkIX9+cBqlq+zOwIB4jV94glP0jQYWibvHuFCRCs/fqsaoEMAyDBhGTxuVv9
+7r7tEHLBdDQZ2iPgVsLgB34YzzrY6vKnuzr8UzGCLPAXxoOh3xg0rHonhR/5882N
+tAYQ8THviSdHAP/VATeUNgG5L7Db0Ptj93r/iy7gmQ7KqpRoG5YAZMe+zH1E5vUu
+2t2poE/0gUnqC8nmbYytIOSpkGk9IP9RBi8BuZEPO3pCkbCV1l0+Ul+/Gr5kb5L1
+Gzr/ZVUlhutGiLaMN+wsmRaTadzBz2RTn4+IQ6Z2VQW/oC3GVNu5XWDfsSjp/lQI
+FgFTrPNSPn98TD8otzycyHVLKFmPZF4jXQxlN5gA0BwtaTotf7sXEtUX95fKAAL1
+lCuLhdg8zLCCBtdOmNkQSrXJwTG+JsM/ye/5XmD+Lofqs6Cbh9al3QIaWqchD8dY
+uitAAzor757+4XTA7r/Wd1c4kqf2UhWBlLJzInSIudCjHCOexwQG5SUoHZEYUnmT
+drlw79kyjfmn+r3SWZT9RbT8N66REXwZcqLIF8II6mtc2TNwOH2c6H9mWm2UxQt2
+x1mo3tD8KhE6dCAZRSO7+e+rdULfK2sNWDkeeQgkU4xgHAb+wdZ8ZRGXLRiflxTW
+60pF0TOrbdzJE3tSaSfItKtrMZ/FTSjEyf1mhmI29b7XGSIMmZpEd+rvX8a6s0+G
+sWWqnjm6TSqSjd1XlLMWfk1O6z17TZFh1sw2i5hRnlqYyaceSgFPl8/tHkPyZwcW
+wT1LsLi9PwdxQ6P4QHyHTQdAKECsPJbCklFBXoHrNHnps69J27751HmMSnanlRoc
+oMmperqUFXk2Vb8c6ZwZSBQaR2KJgOLIqKJ9nIfkPNE/MnP/TBDGVvfF3H08wMum
+gIKpiP2FuPeO9x8clBjLDMFcJ5lQ6buFhnGSy/OGDAjRGmCjlhQLqn9WQ/YrlQ3p
+66o1ZyF0fPgfBbOXB0NmDmyf1Ka5KTtvTIurOolSWfkgNW7k8FckZNB4lNVqp+lS
+K9K2Is94sq/5xwQa+KN4ZuH30xSU8f3Qw9hwiUyo8oHk39o8Zsx5Qzj5N+RS4LAF
+2h99mBzzPxaXqYjlQYUW+ST1PVFdsZ6CauJwPCzGONSgwidVtjuaPLDjfLuPd+Zs
+UP/hZxYFeCKycHlZA16EdwufqfNGNxeD5QEUX+9/YiFr3w/GRoZjf02WtUtuxTWa
+FAgQCmnUp5r9fUcTErCGtLTqc6LAkWpQutaR5SQY6ypBv6jjBEkfSOQgZVwAMuM/
+raTtg6ijXdcEm0eQ8NVNPJGETo0ZsHV4J0tJgcPaiTqpIpvYgN7FNG/2oE4mWCEs
+upuD3iYbTsLkdELTAm13BHENjxtWppG0T0VcfwkvcTQpJNedD9iywOnL87lpK8A5
+uMG8ULuupEiqNLPX62m/Xb4VChDpZzlEvCr+TuMPgmnAtfLshbZmUw==
+-----END RSA PRIVATE KEY-----
