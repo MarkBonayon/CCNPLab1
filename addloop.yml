@@ -3,7 +3,7 @@
   hosts: ctaas
   gather_facts: no
   become: yes
-  task: 
+  tasks: 
     - name: Create Loop
       ios_command: 
         commands: 
